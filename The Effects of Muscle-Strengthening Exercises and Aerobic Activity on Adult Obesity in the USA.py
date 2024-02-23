@@ -1,61 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Section 0: grading
-# 
-#   - *If you currently have a grade in the course that you are satisfied with:*
-#     - **You do not need to complete this Final!** 
-#     - The grade indicated on your Challenge Feedback sheet (on ELMS under 
-#       Challenge 5 feedback) will be your final course grade.
-#   
-#   - *If you currently have less than a B in the course and you want to get a B:*
-#     - Complete Sections 1 and 2, including all items where it says 
-# 	  *COMPLETE THE FOLLOWING* or *ANSWER THE FOLLOWING*.
-#     - If you are missing any previous Challenges, complete the items that 
-#       indicate something like "if you are missing Challenge 1".
-# 	
-#   - *If you are going for an A in the course, you will need to:*
-#     - Complete all three Sections, including all items where it says 
-# 	  *COMPLETE THE FOLLOWING* or *ANSWER THE FOLLOWING*.
-#     - If you are missing any previous Challenges, complete the items that 
-#       indicate something like "if you are missing Challenge [X]".
-#     - Decide if you want to do a Multiple Regression (multiple predictors), 
-#       or a Logistic Regression (a binary categorical response variable).  
-#       Complete the items indicated for those, in addition to other items.
-# 
-#   - *When completing sections that are for missing Challenges:*
-#     - The code provided should help you complete it.
-#     - The instructions and Readiness from those Challenges may contain
-#       additional help and explanation if you need it.
-# 
-#   - **IF YOU INTEND TO COMPLETE A LOGISTIC REGRESSION**:
-# 	- Use the `spotify-2023_CLEAN.csv` data set. The other data sets may not have
-#       appropriate data for logistic regression.
-#     - Pick either the `solo` or `major` variables to be your response variable 
-#       (aka dependent variable, variable you are trying to predict).
-#     - The `solo` variable is coded 1 if the song artist is a solo artist, 
-#       and 0 if there is more than one person in the group.
-#     - The `major` variable is coded 1 if the song is in a major key, and 0 if not.
-# 
-#   - **GENERAL TIP**:
-#     - The data sets were all selected because there was "something to find" in
-#       all of them. You might want to try a few different predictors, etc. before
-#       settling on one. However, you are NOT required to find anything 
-#       "statistically significant."
-#     - All you need to do is to develop reasonable questions about which variable or
-#       variables might predict another variable in the data, follow the procedure
-#       below to test that hypothesis, and discuss the finding, whether or not you
-#       found anything significant.  It's the process that matters!
-#     - Good luck!
-# 
-
-# 
-# # SECTION 1: exploratory analysis
-# 
-# Make sure to run the code to import modules first:
-
-# In[1]:
-
+# exploratory analysis
 
 import numpy as np
 import pandas as pd
@@ -64,95 +7,13 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 import statsmodels.formula.api as smf
 
-
-# ## 1. Load Data
-# 
-# *COMPLETE THE FOLLOWING*
-#   - Indicate which data set you are using for the Final.
-#   - Load the data into R.
-#   - See the code chunk below as an example.
-#   - Throughout the examples, change YOURDATA to a variable of your choice.
-#   - For example, you could pick "airlines" or "delays" if you are using
-#     the Airline Delays data.
-# 
-# **IF YOU ARE USING THE SPOTIFY DATA**
-#   - Use the second line in the chunk below, because the Spotify data
-#     contains characters which don't work with the default UTF-8 encoding.
-
-# In[2]:
-
-
 # Nutrition Stats Dataset
 obesity_data = pd.read_csv("Nutrition__Physical_Activity__and_Obesity_-_Behavioral_Risk_Factor_Surveillance_System_OVERALL.csv")
 # YOURDATA = pd.read_csv("data_sets/spotify-2023_CLEAN.csv", encoding = "ISO-8859-1")
 
-
-# 
-#   - Check the top few rows and the column names to make sure the data was 
-#     read in correctly. (Example code below.)
-# 
-
-# In[3]:
-
-
 print(obesity_data.head())
 
-
-# In[4]:
-
-
 print(obesity_data.columns)
-
-
-# 
-# ## 2. Describe variables of interest
-# 
-# *ANSWER THE FOLLOWING*
-#   - Which variables are you using in your analysis?
-#   - Describe each of them informally:
-#     - Include the name of the variable and what it represents.
-#   - Which variable is your **response** variable, (aka dependent variable or 
-#     outcome variable) that you are trying to predict?
-#   - Which variable(s) is/are your **predictor** variables (aka independent
-#     variable), which you are using to predict the response?
-# 
-
-# Predictor Variables:
-#     Q046 - Percent of adults who achieve at least 300+ minutes a week of moderate-intensity aerobic physical
-#     activity or 150 minutes a week of vigorous-intensity aerobic activity (or an equivalent combination)
-#     Q043 - Percent of adults who engage in muscle-strengthening activities on 2 or more days a week
-# Response Variable:
-#     Q036 - Percent of adults aged 18 years and older who have obesity
-
-#   - **IF YOU ARE DOING MULTIPLE REGRESSION**: 
-#     - Make sure you pick at least two predictors.
-# 
-
-#   - **IF YOU ARE DOING LOGISTIC REGRESSION**: 
-#     - See note above about picking a binary response variable in the Spotify data.
-# 
-
-#   - **IF YOU ARE MISSING CHALLENGE 1**: 
-#     - Make an educated guess or describe your initial expectations about 
-#       possible values for the variables you selected above. What's the general 
-#       range you'd expect? What kinds of values (numbers? large numbers or small? 
-#       discrete integers or continuous (decimal) values?)
-
-#   
-# ## 3. Articulate research questions
-# 
-# *ANSWER THE FOLLOWING*:
-#   - Why is it reasonable to expect that your predictor(s) might predict your 
-#     response variable?
-#   - Are you expecting positive or negative relationships? Why?
-#     - Tip: a negative relationship in a regression means that (a) the parameter 
-#       estimate is negative, and (b) as the predictor values get higher, the 
-#       response value gets lower.
-#   - If you find a positive or negative relationship, what would that mean? 
-#     Why would it be interesting? (as in, real world impact)
-#   - For example, who might it matter for, if you find a relationship between
-#     variables?
-# 
 
 # The Q046 variable represents the percent of adults who perform sufficient exercise for maintaining a healthy life. Exercise burns calories (energy). The more exercise someone does, the less energy will be converted to fat (accumulation of fat leads to obesity). Therefore, it's reasonable to assume exercise amount has an effect on obesity.
 # 
@@ -168,23 +29,9 @@ print(obesity_data.columns)
 # 
 # The relationship results would matter for people concerned about obesity.
 
-# ## 4. Univariate plots and details
-# 
-# *COMPLETE THE FOLLOWING*
-#   - Create a histogram or density plot for each of your variables of interest, 
-#     both predictor(s) and response variables.
-#   - The following code plots a histogram of a variable called VAR from a data 
-#     set called YOURDATA:
-# 
-
-# In[5]:
-
+# Univariate plots and details
 
 obesity_data.head()
-
-
-# In[6]:
-
 
 # predictor
 sns.histplot(x = "Q046", data=obesity_data)
@@ -195,9 +42,6 @@ sns.histplot(x = "Q046", data=obesity_data)
 # 
 #   - The following does the same, but with a density plot:
 # 
-
-# In[7]:
-
 
 sns.kdeplot(x="Q046", data=obesity_data)
 
@@ -238,102 +82,13 @@ sns.kdeplot(x="Q036", data=obesity_data)
 
 # While this distribution is more normal looking, but still not normal. There are too many Q036 values with similar densities in the middle that make the plot too wide to fir the normal categorization.
 
-# 
-# *COMPLETE THE FOLLOWING*
-#   - For each plot, comment on whether the variable looks like it is distributed 
-#     roughly like a normal distribution.
-#   - Comment on whether any variables seem like a good candidate for 
-#     log-transformation, and if so, plot it both transformed and untransformed.
-#   - You should use a histogram or barplot if you are examining a categorical
-#     variable.
-# 
-# **IF YOU ARE MISSING CHALLENGE 2**:
-#   - Examine (print) the minimum, maximum, mean, quartiles, and standard 
-#     deviation of each variable.
-#   - Plot a theoretical normal density with the same mean and standard deviation 
-#     superimposed on a density plot of one variable.
-# 
-# To get all of these values at once, you can use the following (changing the name 
-# of the data frame to match yours):
-
-# In[12]:
-
-
 obesity_data.describe()
-# or get a subset of columns (change names to match columns you want)
-# YOURDATA[["VAR2", "VAR2"]].describe()
-
-
-# To generate theoretical densities from a normal distribution, you will need the 
-# mean and standard deviation of the variable of interest.  The following works 
-# for a variable called VAR for a data frame YOURDATA:
-
-# In[13]:
 
 
 VAR_values = obesity_data["Q046"]
-x_grid = np.linspace(VAR_values.min(), VAR_values.max())
-normal_densities = stats.norm.pdf(x_grid, loc = VAR_values.mean(), scale = np.std(VAR_values))
-
-
-# 
-# Then the following plots these normal densities as an orange curve, along with the 
-# (empirical) density plot (in blue) of the variable VAR in data frame YOURDATA.
-# 
-
-# In[14]:
-
-
-sns.kdeplot(x="Q046", data=obesity_data)
-sns.lineplot(x=x_grid, y=normal_densities)
-
-
-# 
-# **IF YOU ARE MISSING CHALLENGE 2**
-#   - Comment on whether the empirical density looks similar to the theoretical 
-#     normal distribution.
-# 
-
-# The theoretical distribution for the predictor variable is similar to to the actual distribution.
-
-# 
-# **IF YOU ARE MISSING CHALLENGE 1**:
-#   - Now that you have examined these variables, how do they match the 
-#     expectations you described above?  Was there anything unexpected?
-# 
-
-# ## 5. Multivariate plots
-# 
-# *COMPLETE THE FOLLOWING*
-#   - Create a scatter plot with the predictor on the x-axis and the response on 
-#     the y-axis.
-#   
-# **IF YOU ARE MISSING CHALLENGE 4**:
-#   - Create scatter plots with and without log transformations of both response 
-#     and predictor variables (unless a variable is categorical).
-# 	
-# **IF YOU ARE DOING MULTIPLE REGRESSION**:
-#   - Make scatter plots between each predictor and the response, separately.
-#   - Also make a scatter plot between two of your *predictors*.
-#   - Do they appear to be related? If so, is that potentially a problem?
-#   
-# **IF YOU ARE DOING LOGISTIC REGRESSION**:
-#   - Instead of scatter plots with your (binary) response, plot density plots 
-#     of your predictor(s), using color/fill to split the densities according to 
-#     the response.
-
-# 	
-# The following code creates a scatter plot for predictor PRED and response RESP 
-# in data frame YOURDATA:
-# 
-
-# In[15]:
 
 
 sns.scatterplot(x = "Q046", y = "Q036", data=obesity_data)
-
-
-# In[16]:
 
 
 sns.scatterplot(x = "Q043", y = "Q036", data=obesity_data)
@@ -359,13 +114,6 @@ sns.kdeplot(x="Q046", data=obesity_data, hue="Q036")
 
 
 # ## 6. Transformations for model-fitting
-# 
-# *COMPLETE THE FOLLOWING*
-#   - After having plotted variables and some relationships, are there any 
-#     transformations you think you should perform for the analysis? Why or why not?
-#   - If you decide to transform a variable, create a new column with the
-#     transformed value, to make it easier to plot and include in your model.
-# 
 
 # No. While the distributions aren't all normal, they are close enough to where it is appropriate to keep the data on the same scale that is is now. The log transformations just mess the distributions up.
 
